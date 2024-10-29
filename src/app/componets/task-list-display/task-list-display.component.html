@@ -1,4 +1,37 @@
 <!DOCTYPE html>
 <html>
-    
+    <div class="background-color"> 
+        <div *ngIf="isLoading">
+            <p>Loading tasks...</p>
+        </div>
+        
+        <div *ngIf="!isLoading && error">
+            <p>{{ error }}</p>
+        </div>
+        
+        <div *ngIf="!isLoading && !error && tasks.length > 0">
+            <table>
+            <thead>
+                <tr>
+                <th>Task ID</th>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of tasks">
+                <td>{{ task.id }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.dueDate | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ task.status ? 'Compelete' : 'Incomplete' }}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        
+        <div *ngIf="!isLoading && !error && tasks.length === 0">
+            <p>No tasks available.</p>
+        </div>
+    </div>  
 </html>

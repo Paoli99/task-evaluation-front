@@ -7,7 +7,7 @@ import { TaskService } from '../../services/task.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './task-list-display.component.html',
-  styleUrl: './task-list-display.component.css'
+  styleUrls: ['./task-list-display.component.css']
 })
 export class TaskListDisplayComponent {
   tasks: any[] = [];
@@ -20,11 +20,12 @@ export class TaskListDisplayComponent {
 
     this.taskService.getTasks().subscribe(
       (data) => {
-        console.log('Data received from API:', data);
         this.tasks = data;
+        this.isLoading = false;
       },
       (error) => {
-        console.error('Error fetching tasks:', error);
+        this.error = 'Error loading task list';
+        this.isLoading = false;
       }
     );
   }
