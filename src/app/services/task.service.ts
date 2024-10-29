@@ -15,11 +15,12 @@ interface Task {
 })
 
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks';
 
   constructor(private http: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+    console.log('Fetching tasks...');
+    return this.http.get<Task[]>('http://localhost:3000/tasks');
+    
   }
 }
